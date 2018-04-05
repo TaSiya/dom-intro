@@ -27,7 +27,7 @@ function calculateBtnClicked(){
          total += 0.75;
       }
    }
-   billTotal.innerHTML = total.toFixed(2);
+   billTotal.textContent = total.toFixed(2);
 };
 
 calculateBtn.addEventListener('click', function(){
