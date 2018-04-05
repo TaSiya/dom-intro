@@ -9,7 +9,10 @@ var totalOne = document.querySelector('.totalOne');
 
 //add an event listener for when the add button is pressed
 addToBillBtn.addEventListener('click', function(){
-   text_bill(billTypeText);
+   var total = text_bill(billTypeText);
+
+   if(total > 1 & total < 50){totalOne.style.background = 'orange';}
+   else if (total > 50){totalOne.style.background = 'red';}
 });
 //in the event listener check if the value in the bill type textbox is 'sms' or 'call'
 // * add the appropriate value to the running total
@@ -24,6 +27,7 @@ function text_bill(bill){
    else if(bill.value.startsWith('c')){
       callTotalOne.textContent = parseFloat(callTotalOne.textContent) + 2.75 ;
    }
+   totalOne.textContent = parseFloat(smsTotalOne.textContent) + parseFloat(callTotalOne.textContent);
 
-   totalOne.innerHTML =    parseFloat(smsTotalOne.textContent) + parseFloat(callTotalOne.textContent);
+   return totalOne.textContent;
 }
