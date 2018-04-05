@@ -1,10 +1,10 @@
 
 //get a reference to the calculate button
-var calculateBtnElement = document.querySelector('.calculateBtn');
+var calculateBtn = document.querySelector('.calculateBtn');
 //get a reference to the billTotal element
-var totalElement = document.querySelector('.total');
+var billTotal = document.querySelector('.billTotal');
 //get a reference to the billString
-var billStringElement = document.querySelector(".billStrng");
+var billString = document.querySelector(".billString");
 //create the function that will be called when the calculate button is pressed
 //  * this function should read the string value entered - split it on a comma.
 //  * loop over all the entries in the the resulting list
@@ -16,7 +16,7 @@ var billStringElement = document.querySelector(".billStrng");
 
 
 function calculateBtnClicked(){
-   var billList = billStringElement.split(', ');
+   var billList = billString.value.split(', ');
    var total = 0 ;
 
    for(var i= 0 ; i < billList.length ; i++ ){
@@ -27,11 +27,9 @@ function calculateBtnClicked(){
          total += 0.75;
       }
    }
+   billTotal.innerHTML = total.toFixed(2);
+};
 
-   totalElement = total.toFixed(2);
-   document.total = totalElement;
-}
-
-calculateBtnElement.addEventListener('click', calculateBtnClicked);{
-   
-}
+calculateBtn.addEventListener('click', function(){
+   calculateBtnClicked();
+});
