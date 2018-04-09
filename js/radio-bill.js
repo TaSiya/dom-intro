@@ -6,14 +6,18 @@ var radioBillAddBtn = document.querySelector('.radioBillAddBtn');
 var callTotalTwo = document.querySelector('.callTotalTwo');
 var smsTotalTwo = document.querySelector('.smsTotalTwo');
 var totalTwo = document.querySelector('.totalTwo');
+
+var call = 0 ;
+var sms = 0 ;
+var total = 0 ;
 //add an event listener for when the add button is pressed
 
 radioBillAddBtn.addEventListener('click', function(){
    radio_bill();
-   if(totalTwo.textContent > 30 & totalTwo.textContent <= 50){
+   if(total > 30 & total <= 50){
       totalTwo.classList.add("warning");
    }
-   else if (totalTwo.textContent > 50){
+   else if (total > 50){
    totalTwo.classList.add("danger");
    }
 });
@@ -28,11 +32,13 @@ function radio_bill(){
       var billItemType = checkedRadioBtn.value
    }
    if(billItemType === 'call'){
-      callTotalTwo.textContent = parseFloat(callTotalTwo.textContent) + 2.75;
+      call = call + 2.75;
    }
    else if (billItemType === 'sms'){
-      smsTotalTwo.textContent = parseFloat(smsTotalTwo.textContent) + 0.75;
+      sms = sms + 0.75;
    }
-
-   totalTwo.textContent = parseFloat(callTotalTwo.textContent) + parseFloat(smsTotalTwo.textContent);
+   total = call + sms ;
+   callTotalTwo.textContent = call;
+   smsTotalTwo.textContent = sms ;
+   totalTwo.textContent = total;
 }

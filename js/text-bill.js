@@ -7,10 +7,12 @@ var callTotalOne = document.querySelector('.callTotalOne');
 var smsTotalOne = document.querySelector('.smsTotalOne');
 var totalOne = document.querySelector('.totalOne');
 
+var call = 0 ;
+var sms = 0 ;
+var total = 0 ;
 //add an event listener for when the add button is pressed
 addToBillBtn.addEventListener('click', function(){
-   var total = text_bill(billTypeText);
-
+   text_bill(billTypeText);
    if(total > 30 & total < 50){totalOne.classList.add("warning");}
    else if (total > 50){totalOne.classList.add("danger");}
 });
@@ -21,13 +23,15 @@ addToBillBtn.addEventListener('click', function(){
 
 function text_bill(bill){
 
-   if(bill.value.startsWith('s')){
-      smsTotalOne.textContent = parseFloat(smsTotalOne.textContent) + 0.75 ;
+   if(bill.value === 'sms'){
+      sms = sms + 0.75 ;
    }
-   else if(bill.value.startsWith('c')){
-      callTotalOne.textContent = parseFloat(callTotalOne.textContent) + 2.75 ;
+   else if(bill.value === 'call'){
+      call = call + 2.75 ;
    }
-   totalOne.textContent = parseFloat(smsTotalOne.textContent) + parseFloat(callTotalOne.textContent);
+   total = sms + call;
 
-   return totalOne.textContent;
+   smsTotalOne.textContent = sms;
+   callTotalOne.textContent = call;
+   totalOne.textContent = total;
 }
