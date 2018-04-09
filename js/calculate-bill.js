@@ -13,10 +13,10 @@ var billString = document.querySelector(".billString");
 
 
 //link the function to a click event on the calculate button
-
+var total = 0 ;
 function calculateBtnClicked(){
-   var billList = billString.value.split(', ');
-   var total = 0 ;
+   var billList = billString.value.split(',');
+
 
    for(var i= 0 ; i < billList.length ; i++ ){
       if(billList[i].startsWith('c')){
@@ -31,4 +31,10 @@ function calculateBtnClicked(){
 
 calculateBtn.addEventListener('click', function(){
    calculateBtnClicked();
+   if(total > 20 & total <= 30){
+      billTotal.classList.add("warning");
+   }
+   else if(total > 30){
+      billTotal.classList.add("danger");
+   }
 });

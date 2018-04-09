@@ -11,8 +11,8 @@ var totalOne = document.querySelector('.totalOne');
 addToBillBtn.addEventListener('click', function(){
    var total = text_bill(billTypeText);
 
-   if(total > 1 & total < 50){totalOne.style.background = 'orange';}
-   else if (total > 50){totalOne.style.background = 'red';}
+   if(total > 30 & total < 50){totalOne.classList.add("warning");}
+   else if (total > 50){totalOne.classList.add("danger");}
 });
 //in the event listener check if the value in the bill type textbox is 'sms' or 'call'
 // * add the appropriate value to the running total
