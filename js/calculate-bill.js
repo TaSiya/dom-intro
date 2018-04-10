@@ -16,7 +16,7 @@ var billString = document.querySelector(".billString");
 
 function calculateBtnClicked(){
    var total = 0 ;
-   var billList = billString.value.split(',');
+   var billList = billString.value.split(', ');
 
 
    for(var i= 0 ; i < billList.length ; i++ ){
