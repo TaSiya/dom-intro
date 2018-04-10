@@ -11,13 +11,14 @@ var billString = document.querySelector(".billString");
 //  * check if it is a call or an sms and add the right amount to the overall total
 //  * once done looping over all the entries - display the total onto the screen in the billTotal element
 
-
+var total = 0 ;
 //link the function to a click event on the calculate button
 
 function calculateBtnClicked(){
-   var total = 0 ;
+   billTotal.classList.remove("warning");
+   billTotal.classList.remove("danger");
    var billList = billString.value.split(', ');
-
+   total = 0;
 
    for(var i= 0 ; i < billList.length ; i++ ){
       if(billList[i].startsWith('c')){
@@ -32,7 +33,7 @@ function calculateBtnClicked(){
 
 calculateBtn.addEventListener('click', function(){
    calculateBtnClicked();
-   if(total > 20 & total <= 30){
+   if(total > 20 && total <= 30){
       billTotal.classList.add("warning");
    }
    else if(total > 30){
