@@ -13,8 +13,9 @@ var billString = document.querySelector(".billString");
 
 
 //link the function to a click event on the calculate button
-var total = 0 ;
+
 function calculateBtnClicked(){
+   var total = 0 ;
    var billList = billString.value.split(',');
 
 
