@@ -14,6 +14,11 @@ var settingBtnAdd = document.querySelector('.settingBtnAdd');
 //get a reference to the 'Update settings' button
 var updateSettings = document.querySelector('.updateSettings');
 // create a variables that will keep track of all the settings
+callCostSetting.value = 2.55;
+smsCostSetting.value = 0.65;
+warningLevelSetting.value = 30.00;
+criticalLevelSetting.value = 65.00;
+
 var callCost = 2.55 ;
 var smsCost = 0.65;
 var warning = 30.00;
