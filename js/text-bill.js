@@ -7,14 +7,14 @@ var callTotalOne = document.querySelector('.callTotalOne');
 var smsTotalOne = document.querySelector('.smsTotalOne');
 var totalOne = document.querySelector('.totalOne');
 
-var call = 0 ;
-var sms = 0 ;
-var total = 0 ;
+var call1 = 0.00 ;
+var sms1 = 0.00 ;
+var total1 = 0.00 ;
 //add an event listener for when the add button is pressed
 addToBillBtn.addEventListener('click', function(){
    text_bill(billTypeText);
-   if(total > 30 & total < 50){totalOne.classList.add("warning");}
-   else if (total > 50){totalOne.classList.add("danger");}
+   if(total1 > 30 & total1 < 50){totalOne.classList.add("warning");}
+   else if (total1 > 50){totalOne.classList.add("danger");}
 });
 //in the event listener check if the value in the bill type textbox is 'sms' or 'call'
 // * add the appropriate value to the running total
@@ -24,14 +24,14 @@ addToBillBtn.addEventListener('click', function(){
 function text_bill(bill){
 
    if(bill.value === 'sms'){
-      sms = sms + 0.75 ;
+      sms1 = sms1 + 0.75 ;
    }
    else if(bill.value === 'call'){
-      call = call + 2.75 ;
+      call1 = call1 + 2.75 ;
    }
-   total = sms + call;
+   total1 = sms1 + call1;
 
-   smsTotalOne.textContent = sms;
-   callTotalOne.textContent = call;
-   totalOne.textContent = total;
+   smsTotalOne.textContent = sms1.toFixed(2);
+   callTotalOne.textContent = call1.toFixed(2);
+   totalOne.textContent = total1.toFixed(2);
 }

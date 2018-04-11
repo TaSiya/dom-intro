@@ -24,9 +24,9 @@ var smsCost = 0.65;
 var warning = 30.00;
 var critical = 65.00;
 // create a variables that will keep track of all three totals.
-var call = 0;
-var sms = 0;
-var total = 0;
+var call = 0.00;
+var sms = 0.00;
+var total = 0.00;
 //add an event listener for when the 'Update settings' button is pressed
 updateSettings.addEventListener('click', function(){
    callCost = parseFloat(callCostSetting.value);
