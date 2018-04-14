@@ -7,31 +7,62 @@ var callTotalOne = document.querySelector('.callTotalOne');
 var smsTotalOne = document.querySelector('.smsTotalOne');
 var totalOne = document.querySelector('.totalOne');
 
-var call1 = 0.00 ;
-var sms1 = 0.00 ;
-var total1 = 0.00 ;
+
 //add an event listener for when the add button is pressed
 addToBillBtn.addEventListener('click', function(){
-   text_bill(billTypeText);
-   if(total1 > 30 & total1 < 50){totalOne.classList.add("warning");}
-   else if (total1 > 50){totalOne.classList.add("danger");}
+   text_Dom();
 });
 //in the event listener check if the value in the bill type textbox is 'sms' or 'call'
 // * add the appropriate value to the running total
 // * add nothing for invalid values that is not 'call' or 'sms'.
 // * display the latest total on the screen
+var factRef = factory();
+function text_Dom(){
 
-function text_bill(bill){
+   var flo =(billTypeText.value);
+   factRef.calculations(flo);
+   var answer = factRef.getter();
 
-   if(bill.value === 'sms'){
-      sms1 = sms1 + 0.75 ;
+   smsTotalOne.textContent = factRef.getSmss();
+   callTotalOne.textContent = factRef.getCalls();
+
+
+   if(answer > 30 & answer < 50){totalOne.classList.add("warning");}
+   else if (answer > 50){totalOne.classList.add("danger");}
+   totalOne.textContent = answer.toFixed(2);
+}
+
+function factory(){
+   var call1 = 0.00 ;
+   var sms1 = 0.00 ;
+   var total1 = 0.00 ;
+
+   function text_bill(bill){
+      if(bill === 'sms'){
+         sms1 = sms1 + 0.75 ;
+      }
+      else if(bill=== 'call'){
+         call1 = call1 + 2.75
+      }
+      total1 = sms1 + call1;
    }
-   else if(bill.value === 'call'){
-      call1 = call1 + 2.75 ;
-   }
-   total1 = sms1 + call1;
 
-   smsTotalOne.textContent = sms1.toFixed(2);
-   callTotalOne.textContent = call1.toFixed(2);
-   totalOne.textContent = total1.toFixed(2);
+   function getTotal(){
+      return total1 ;
+   }
+
+   function getCall(){
+      return call1;
+   }
+
+   function getSms(){
+      return sms1;
+   }
+
+   return{
+      calculations : text_bill,
+      getter : getTotal,
+      getCalls : getCall,
+      getSmss : getSms
+   }
 }
