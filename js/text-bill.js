@@ -16,14 +16,14 @@ addToBillBtn.addEventListener('click', function(){
 // * add the appropriate value to the running total
 // * add nothing for invalid values that is not 'call' or 'sms'.
 // * display the latest total on the screen
-var factRef = factory();
+var factRef = Factory();
 function text_Dom(){
 
    var flo =(billTypeText.value);
    factRef.calculations(flo);
-   var answer = factRef.getter();
+   var answer = factRef.grandTotal();
 
-   smsTotalOne.textContent = factRef.getSmss();
+   smsTotalOne.textContent = factRef.getSmses();
    callTotalOne.textContent = factRef.getCalls();
 
 
@@ -32,7 +32,7 @@ function text_Dom(){
    totalOne.textContent = answer.toFixed(2);
 }
 
-function factory(){
+function Factory(){
    var call1 = 0.00 ;
    var sms1 = 0.00 ;
    var total1 = 0.00 ;
@@ -61,8 +61,8 @@ function factory(){
 
    return{
       calculations : text_bill,
-      getter : getTotal,
+      grandTotal : getTotal,
       getCalls : getCall,
-      getSmss : getSms
+      getSmses : getSms
    }
 }
