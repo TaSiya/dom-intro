@@ -17,29 +17,29 @@ radioBillAddBtn.addEventListener('click', function(){
 // * add the appropriate value to the running total
 // * add nothing for invalid values that is not 'call' or 'sms'.
 // * display the latest total on the screen
-var refRadioFact = radioFact();
+var refRadioFact = Factory();
 function radio_bill_Dom(){
    var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
    if (checkedRadioBtn){
       var billItemType = checkedRadioBtn.value;
 
-      refRadioFact.calculate(billItemType);
+      refRadioFact.calculations2(billItemType);
 
    }
 
-   callTotalTwo.textContent = refRadioFact.getCall2();
-   smsTotalTwo.textContent = refRadioFact.getSms2();
-   totalTwo.textContent = refRadioFact.getTotal2();
+   callTotalTwo.textContent = refRadioFact.getCalls2();
+   smsTotalTwo.textContent = refRadioFact.getSmses2();
+   totalTwo.textContent = refRadioFact.grandTotal2();
 
-   if(refRadioFact.getTotal2() > 30 & refRadioFact.getTotal2() <= 50){
+   if(refRadioFact.grandTotal2() > 30 & refRadioFact.grandTotal2() <= 50){
       totalTwo.classList.add("warning");
    }
-   else if (refRadioFact.getTotal2() > 50){
+   else if (refRadioFact.grandTotal2() > 50){
    totalTwo.classList.add("danger");
    }
 }
 
-function radioFact(){
+function Factory(){
    var call2 = 0.00 ;
    var sms2 = 0.00 ;
    var total2 = 0.00 ;
@@ -67,9 +67,9 @@ function radioFact(){
    }
 
    return {
-      calculate : radio_bill,
-      getTotal2 : getBill,
-      getCall2 : getCall,
-      getSms2 : getSms
+      calculations2 : radio_bill,
+      grandTotal2 : getBill,
+      getCalls2 : getCall,
+      getSmses2 : getSms
    }
 }
