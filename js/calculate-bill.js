@@ -19,10 +19,10 @@ function calculateBtnClicked(){
    billTotal.classList.remove("warning");
    billTotal.classList.remove("danger");
 
-   var billList = billString.value.split(', ');
+   var billList = billString.value;
    var tot = calculateBillEvent(billList);
 
-   billTotal.textContent = tot.toFixed(2);
+   billTotal.textContent = tot;
 
    if(tot > 20 && tot <= 30){
       billTotal.classList.add("warning");
@@ -30,21 +30,23 @@ function calculateBtnClicked(){
    else if(tot > 30){
       billTotal.classList.add("danger");
    }
-
-
-};
+}
 
 function calculateBillEvent(billList){
    var total = 0 ;
-   for(var i= 0 ; i < billList.length ; i++ ){
-      if(billList[i].startsWith('c')){
-         total += 2.75;
+   var calls = 0;
+   var smss = 0
+   var bills = billList.split(',');
+   for(var i= 0 ; i < bills.length ; i++ ){
+      if(bills[i].startsWith('c')){
+         calls += 2.75;
       }
-      else if(billList[i].startsWith('s')){
-         total += 0.75;
+      else if(bills[i].startsWith('s')){
+         smss += 0.75;
       }
    }
-   return total;
+   total = calls + smss;
+   return total.toFixed(2);
 }
 
 calculateBtn.addEventListener('click', function(){
