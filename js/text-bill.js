@@ -16,54 +16,54 @@ addToBillBtn.addEventListener('click', function(){
 // * add the appropriate value to the running total
 // * add nothing for invalid values that is not 'call' or 'sms'.
 // * display the latest total on the screen
-var factRef = Factory();
+var factRef =  Factory();
 
 function text_Dom(){
 
    var flo =(billTypeText.value);
    factRef.calculations(flo);
-   var answer = factRef.grandTotal2();
+   var answer = factRef.grandTotal();
 
-   smsTotalOne.textContent = factRef.getSmses2();
-   callTotalOne.textContent = factRef.getCalls2();
-
+   smsTotalOne.textContent = factRef.getSmses();
+   callTotalOne.textContent = factRef.getCalls();
+   totalOne.textContent = answer;
 
    if(answer > 30 & answer < 50){totalOne.classList.add("warning");}
    else if (answer > 50){totalOne.classList.add("danger");}
-   totalOne.textContent = answer.toFixed(2);
+
 }
 
-// function Factory(){
-//    var call1 = 0.00 ;
-//    var sms1 = 0.00 ;
-//    var total1 = 0.00 ;
-//
-//    function text_bill(bill){
-//       if(bill === 'sms'){
-//          sms1 = sms1 + 0.75 ;
-//       }
-//       else if(bill=== 'call'){
-//          call1 = call1 + 2.75
-//       }
-//       total1 = sms1 + call1;
-//    }
-//
-//    function getTotal(){
-//       return total1 ;
-//    }
-//
-//    function getCall(){
-//       return call1;
-//    }
-//
-//    function getSms(){
-//       return sms1;
-//    }
-//
-//    return{
-//       calculations : text_bill,
-//       grandTotal : getTotal,
-//       getCalls : getCall,
-//       getSmses : getSms
-//    }
-// }
+function Factory(){
+   var call1 = 0.00 ;
+   var sms1 = 0.00 ;
+   var total1 = 0.00 ;
+
+   function text_bill(bill){
+      if(bill === 'sms'){
+         sms1 = sms1 + 0.75 ;
+      }
+      else if(bill=== 'call'){
+         call1 = call1 + 2.75
+      }
+      total1 = sms1 + call1;
+   }
+
+   function getTotal(){
+      return total1 ;
+   }
+
+   function getCall(){
+      return call1;
+   }
+
+   function getSms(){
+      return sms1;
+   }
+
+   return{
+      calculations : text_bill,
+      grandTotal : getTotal,
+      getCalls : getCall,
+      getSmses : getSms
+   }
+}

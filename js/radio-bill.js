@@ -23,53 +23,18 @@ function radio_bill_Dom(){
    if (checkedRadioBtn){
       var billItemType = checkedRadioBtn.value;
 
-      refRadioFact.calculations2(billItemType);
+      refRadioFact.calculations(billItemType);
 
    }
 
-   callTotalTwo.textContent = refRadioFact.getCalls2();
-   smsTotalTwo.textContent = refRadioFact.getSmses2();
-   totalTwo.textContent = refRadioFact.grandTotal2();
+   callTotalTwo.textContent = refRadioFact.getCalls();
+   smsTotalTwo.textContent = refRadioFact.getSmses();
+   totalTwo.textContent = refRadioFact.grandTotal  ();
 
-   if(refRadioFact.grandTotal2() > 30 & refRadioFact.grandTotal2() <= 50){
+   if(refRadioFact.grandTotal() > 30 & refRadioFact.grandTotal() <= 50){
       totalTwo.classList.add("warning");
    }
-   else if (refRadioFact.grandTotal2() > 50){
+   else if (refRadioFact.grandTotal() > 50){
    totalTwo.classList.add("danger");
-   }
-}
-
-function Factory(){
-   var call2 = 0.00 ;
-   var sms2 = 0.00 ;
-   var total2 = 0.00 ;
-
-   function radio_bill(value){
-      if(value === 'call'){
-         call2 = call2 + 2.75;
-      }
-      else if (value === 'sms'){
-         sms2 = sms2 + 0.75;
-      }
-      total2 = call2 + sms2 ;
-   }
-
-   function getBill(){
-      return total2;
-   }
-
-   function getCall(){
-      return call2;
-   }
-
-   function getSms(){
-      return sms2;
-   }
-
-   return {
-      calculations2 : radio_bill,
-      grandTotal2 : getBill,
-      getCalls2 : getCall,
-      getSmses2 : getSms
    }
 }
