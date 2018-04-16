@@ -17,12 +17,16 @@ var updateSettings = document.querySelector('.updateSettings');
 var referenceSettings = settings();
 //add an event listener for when the 'Update settings' button is pressed
 updateSettings.addEventListener('click', function(){
-   callCostTemp = parseFloat(callCostSetting.value);
-   referenceSettings.setCritical(callCostTemp);
-   smsCost = parseFloat(smsCostSetting.value);
-   warning = parseFloat(warningLevelSetting.value);
-   critical = parseFloat(criticalLevelSetting.value);
    color();
+   callCostTemp = parseFloat(callCostSetting.value);
+   referenceSettings.setCall(callCostTemp);
+   smsCost = parseFloat(smsCostSetting.value);
+   referenceSettings.setSms(smsCost);
+   warning = parseFloat(warningLevelSetting.value);
+   referenceSettings.setWarn(warning);
+   critical = parseFloat(criticalLevelSetting.value);
+   referenceSettings.setCrit(critical);
+
 });
 //add an event listener for when the add button is pressed
 settingBtnAdd.addEventListener('click', function(){
@@ -106,9 +110,11 @@ function settings(){
    function getWarning(){return warning;}
    function getCritical(){return critical;}
 
-   function setCritical(value){
-      critical = value;
-   }
+   function setCritical(value){critical = value;}
+   function setWarning(value){warning = value;}
+   function setCallCost(value){callCost = value;}
+   function setSmsCost(value){smsCost = value;}
+
 
    return {
       calculated : settings_Bill,
@@ -119,7 +125,10 @@ function settings(){
       getSmsCost : getSmsCost,
       getWarningLevel : getWarning,
       getCriticalLevel : getCritical,
-      setCrit : setCritical
+      setCrit : setCritical,
+      setWarn : setWarning,
+      setCall : setCallCost,
+      setSms : setSmsCost
 
    }
 }
