@@ -2,42 +2,36 @@
 var billTypeText = document.querySelector('.billTypeText');
 //get a reference to the add button
 var addToBillBtn = document.querySelector('.addToBillBtn');
-//create a variable that will keep track of the total bill
-var callTotalOne = document.querySelector('.callTotalOne');
-var smsTotalOne = document.querySelector('.smsTotalOne');
 var totalOne = document.querySelector('.totalOne');
-//Reference to my template
-var textBillTemplate = document.querySelector('.textBillTemplate').textContent;
-
-//add an event listener for when the add button is pressed
-addToBillBtn.addEventListener('click', function(){
-   text_Dom();
-});
+//Reference for the handlabar
+var display = document.querySelector('.display');
+var BillTemplate = document.querySelector('.BillTemplate').innerHTML;
+//compiling the template
+var compiledTemplate = Handlebars.compile(BillTemplate);
 
 var factRef =  Factory();
+//Events added to the page(s)
+document.addEventListener('DOMContentLoaded', function(){
+   var allData = {
+      call : 0.00.toFixed(2),
+      sms : 0.00.toFixed(2),
+      total : 0.00.toFixed(2)
+   };
+   var compiledData = compiledTemplate(allData);
+   display.innerHTML = compiledData;
+});
 
-function text_Dom(){
+addToBillBtn.addEventListener('click', function(){
    factRef.calculations(billTypeText.value);
-   var compiledTemplate = Handlebars.compile(textBillTemplate);
+   var allData = {
+      call : factRef.getCalls(),
+      sms : factRef.getSmses(),
+      total : factRef.grandTotal()
+   };
+   var compiledData = compiledTemplate(allData);
+   display.innerHTML = compiledData;
 
-   //Option 1
-   // var allData = {
-   //    call : factRef.getCalls(),
-   //    sms : factRef.getSmses(),
-   //    total : factRef.grandTotal()
-   // };
-
-   //Option 2
-   var callData ={call : factRef.getCalls()};
-   var smsData = {sms : factRef.getSmses()};
-   var totalData = {total : factRef.grandTotal()};
-
-   callTotalOne.textContent = compiledTemplate(callData);
-   smsTotalOne.textContent = compiledTemplate(smsData);
-   totalOne.textContent = compiledTemplate(totalData);
-
-   var totals = compiledTemplate(totalData);
+   var totals = factRef.grandTotal();
    if(totals > 30 & totals < 50){totalOne.classList.add("warning");}
    else if (totals > 50){totalOne.classList.add("danger");}
-
-}
+});

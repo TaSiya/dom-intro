@@ -2,46 +2,46 @@
 var billItemTypeRadio = document.querySelector('.billItemTypeRadio');
 //get a reference to the add button
 var radioBillAddBtn = document.querySelector('.radioBillAddBtn');
-//create a variable that will keep track of the total bill
-var callTotalTwo = document.querySelector('.callTotalTwo');
-var smsTotalTwo = document.querySelector('.smsTotalTwo');
 var totalTwo = document.querySelector('.totalTwo');
 
-//Reference the template
-var BillTemplate = document.querySelector('.textBillTemplate').textContent;
+//Reference for the BillTemplate
+var displayTwo = document.querySelector('.displayTwo');
+var BillTemplate = document.querySelector('.BillTemplate').innerHTML;
+var compiledTemplate = Handlebars.compile(BillTemplate);
 
-
+var refRadioFact = Factory();
 //add an event listener for when the add button is pressed
+document.addEventListener('DOMContentLoaded', function(){
+   var data = {
+      call : 0.00.toFixed(2),
+      sms : 0.00.toFixed(2),
+      total : 0.00.toFixed(2)
+   };
+   var compiledData = compiledTemplate(data);
+   displayTwo.innerHTML = compiledData;
+});
 
 radioBillAddBtn.addEventListener('click', function(){
-   radio_bill_Dom();
-});
-//in the event listener get the value from the billItemTypeRadio radio buttons
-// * add the appropriate value to the running total
-// * add nothing for invalid values that is not 'call' or 'sms'.
-// * display the latest total on the screen
-var refRadioFact = Factory();
-function radio_bill_Dom(){
-   var totalsTwo = refRadioFact.grandTotal();
-   var compiledTemplate = Handlebars.compile(BillTemplate);
    var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
    if (checkedRadioBtn){
       var billItemType = checkedRadioBtn.value;
       refRadioFact.calculations(billItemType);
    }
 
-   var callData = {call : refRadioFact.getCalls()};
-   var smsData = {sms : refRadioFact.getSmses()};
-   var totalData = {total : refRadioFact.grandTotal()}
+   var data ={
+      call : refRadioFact.getCalls(),
+      sms : refRadioFact.getSmses(),
+      total : refRadioFact.grandTotal()
+   }
+   var compiledDataTwo = compiledTemplate(data);
+   displayTwo.innerHTML = compiledDataTwo;
 
-   callTotalTwo.textContent = compiledTemplate(callData);
-   smsTotalTwo.textContent = compiledTemplate(smsData);
-   totalTwo.textContent = compiledTemplate(totalData);
+   var totalsTwo = refRadioFact.grandTotal();
 
-   if(totalsTwo > 30 & totalsTwo <= 50){
+   if(totalsTwo > 30 && totalsTwo <= 50){
       totalTwo.classList.add("warning");
    }
    else if (totalsTwo > 50){
    totalTwo.classList.add("danger");
    }
-}
+});
