@@ -6,64 +6,38 @@ var addToBillBtn = document.querySelector('.addToBillBtn');
 var callTotalOne = document.querySelector('.callTotalOne');
 var smsTotalOne = document.querySelector('.smsTotalOne');
 var totalOne = document.querySelector('.totalOne');
-
+//Reference to my template
+var textBillTemplate = document.querySelector('.textBillTemplate').textContent;
 
 //add an event listener for when the add button is pressed
 addToBillBtn.addEventListener('click', function(){
    text_Dom();
 });
-//in the event listener check if the value in the bill type textbox is 'sms' or 'call'
-// * add the appropriate value to the running total
-// * add nothing for invalid values that is not 'call' or 'sms'.
-// * display the latest total on the screen
+
 var factRef =  Factory();
 
 function text_Dom(){
+   factRef.calculations(billTypeText.value);
+   var compiledTemplate = Handlebars.compile(textBillTemplate);
 
-   var flo =(billTypeText.value);
-   factRef.calculations(flo);
-   var answer = factRef.grandTotal();
+   //Option 1
+   // var allData = {
+   //    call : factRef.getCalls(),
+   //    sms : factRef.getSmses(),
+   //    total : factRef.grandTotal()
+   // };
 
-   smsTotalOne.textContent = factRef.getSmses();
-   callTotalOne.textContent = factRef.getCalls();
-   totalOne.textContent = answer;
+   //Option 2
+   var callData ={call : factRef.getCalls()};
+   var smsData = {sms : factRef.getSmses()};
+   var totalData = {total : factRef.grandTotal()};
 
-   if(answer > 30 & answer < 50){totalOne.classList.add("warning");}
-   else if (answer > 50){totalOne.classList.add("danger");}
+   callTotalOne.textContent = compiledTemplate(callData);
+   smsTotalOne.textContent = compiledTemplate(smsData);
+   totalOne.textContent = compiledTemplate(totalData);
 
-}
+   var totals = compiledTemplate(totalData);
+   if(totals > 30 & totals < 50){totalOne.classList.add("warning");}
+   else if (totals > 50){totalOne.classList.add("danger");}
 
-function Factory(){
-   var call1 = 0.00 ;
-   var sms1 = 0.00 ;
-   var total1 = 0.00 ;
-
-   function text_bill(bill){
-      if(bill === 'sms'){
-         sms1 = sms1 + 0.75 ;
-      }
-      else if(bill=== 'call'){
-         call1 = call1 + 2.75
-      }
-      total1 = sms1 + call1;
-   }
-
-   function getTotal(){
-      return total1 ;
-   }
-
-   function getCall(){
-      return call1;
-   }
-
-   function getSms(){
-      return sms1;
-   }
-
-   return{
-      calculations : text_bill,
-      grandTotal : getTotal,
-      getCalls : getCall,
-      getSmses : getSms
-   }
 }

@@ -7,6 +7,9 @@ var callTotalTwo = document.querySelector('.callTotalTwo');
 var smsTotalTwo = document.querySelector('.smsTotalTwo');
 var totalTwo = document.querySelector('.totalTwo');
 
+//Reference the template
+var BillTemplate = document.querySelector('.textBillTemplate').textContent;
+
 
 //add an event listener for when the add button is pressed
 
@@ -19,22 +22,26 @@ radioBillAddBtn.addEventListener('click', function(){
 // * display the latest total on the screen
 var refRadioFact = Factory();
 function radio_bill_Dom(){
+   var totalsTwo = refRadioFact.grandTotal();
+   var compiledTemplate = Handlebars.compile(BillTemplate);
    var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
    if (checkedRadioBtn){
       var billItemType = checkedRadioBtn.value;
-
       refRadioFact.calculations(billItemType);
-
    }
 
-   callTotalTwo.textContent = refRadioFact.getCalls();
-   smsTotalTwo.textContent = refRadioFact.getSmses();
-   totalTwo.textContent = refRadioFact.grandTotal  ();
+   var callData = {call : refRadioFact.getCalls()};
+   var smsData = {sms : refRadioFact.getSmses()};
+   var totalData = {total : refRadioFact.grandTotal()}
 
-   if(refRadioFact.grandTotal() > 30 & refRadioFact.grandTotal() <= 50){
+   callTotalTwo.textContent = compiledTemplate(callData);
+   smsTotalTwo.textContent = compiledTemplate(smsData);
+   totalTwo.textContent = compiledTemplate(totalData);
+
+   if(totalsTwo > 30 & totalsTwo <= 50){
       totalTwo.classList.add("warning");
    }
-   else if (refRadioFact.grandTotal() > 50){
+   else if (totalsTwo > 50){
    totalTwo.classList.add("danger");
    }
 }

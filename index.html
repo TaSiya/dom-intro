@@ -2,9 +2,20 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <meta name="viewport" content="width=device-width">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+
+
+    <script type="text/x-template" class='textBillTemplate'>
+      {{call}}
+      {{sms}}
+      {{total}}
+    </script>
+
     <link rel="stylesheet" href="css/skeleton.css">
     <link rel="stylesheet" href="css/style.css">
+
+    <title>Dom intro</title>
   </head>
   <body>
     <div class="container">
@@ -68,6 +79,9 @@
           </div>
         </div>
         <div class="six columns box">
+
+         <!-- Text bill Calculations -->
+
           <h3>Text input bill</h3>
 
           <div class="">
@@ -229,7 +243,10 @@
         </div>
       </div>
     </div>
+    <!-- logic files -->
     <script src="js/calculate-bill.js" charset="utf-8"></script>
+    <script src='js/textBill-logic.js' charset="utf-8"></script>
+    <!-- Dom files -->
     <script src="js/text-bill.js" charset="utf-8"></script>
     <script src="js/radio-bill.js" charset="utf-8"></script>
     <script src="js/settings-bill.js" charset="utf-8"></script>
